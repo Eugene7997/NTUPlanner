@@ -1,0 +1,27 @@
+[
+    {
+      "id": 0,
+      "courseName":"CZ2006",
+      "courseIndex": "1234",
+      "location":"NS4-05-86",
+      "lat":1.3454312,
+      "long":103.6801381
+    },
+    {
+      "id": 1,
+      "courseName":"CZ2005",
+      "courseIndex": "1234",
+      "location":"NS4-05-86",
+      "lat":1.3460312,
+      "long":103.6813381
+    },
+    {
+      "id": 2,
+      "courseName":"CZ2004",
+      "courseIndex": "1234",
+      "location":"NS4-05-86",
+      "lat":1.344312,
+      "long":103.6821381
+    }
+
+  ]

@@ -1,0 +1,37 @@
+.courseWholeList {
+    position: static;
+}
+.courseWholeList h3{
+    text-indent:10px;
+    height:40px;
+    background-color: lightgray;
+    border: 2px solid darkgray;
+    border-radius: 10px;
+  }
+
+.courseListItem {
+    width:50px;
+    text-size-adjust: auto;
+    color:black;
+    background-color: var(--color);
+    margin:5px 0px;
+    display:ruby;
+    border: 2px solid darkgray;
+    border-radius: 10px;
+}
+
+.courseListItem:hover {
+    opacity: 70%;
+}
+
+.courseListItem.clash {
+    color:red;
+}
+
+.deleteButton {
+    position: relative;
+    margin-left: auto; 
+    margin-right: 0;
+    color:black;
+    background-color:black;
+}
