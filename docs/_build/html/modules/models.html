@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Models &mdash; NTUPlanner 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Serializers" href="serializers.html" />
+    <link rel="prev" title="Views" href="views.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> NTUPlanner
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Django-backend:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serializers.html">Serializers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parser.html">Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classschedulehtmlextractor.html">Class Schedule Extractor</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NTUPlanner</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-api.models">
+<span id="models"></span><h1>Models<a class="headerlink" href="#module-api.models" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="api.models.Exams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">api.models.</span></span><span class="sig-name descname"><span class="pre">Exams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/api/models.html#Exams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.models.Exams" title="Permalink to this definition"></a></dt>
+<dd><p>Django model which corresponds to the Exams database table. Stores information of all the exams for a semester.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="api.models.Exams.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#api.models.Exams.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="api.models.Exams.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#api.models.Exams.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Exams.courseCode">
+<span class="sig-name descname"><span class="pre">courseCode</span></span><a class="headerlink" href="#api.models.Exams.courseCode" title="Permalink to this definition"></a></dt>
+<dd><p>Course code which uniquely identifies the course from all courses offered in a semester.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Exams.examDate">
+<span class="sig-name descname"><span class="pre">examDate</span></span><a class="headerlink" href="#api.models.Exams.examDate" title="Permalink to this definition"></a></dt>
+<dd><p>Date of the exam for a course in a particular semester.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Exams.examDay">
+<span class="sig-name descname"><span class="pre">examDay</span></span><a class="headerlink" href="#api.models.Exams.examDay" title="Permalink to this definition"></a></dt>
+<dd><p>Day of the week when the exam is held.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Exams.examDuration">
+<span class="sig-name descname"><span class="pre">examDuration</span></span><a class="headerlink" href="#api.models.Exams.examDuration" title="Permalink to this definition"></a></dt>
+<dd><p>Total duration of an exam.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Exams.examTime">
+<span class="sig-name descname"><span class="pre">examTime</span></span><a class="headerlink" href="#api.models.Exams.examTime" title="Permalink to this definition"></a></dt>
+<dd><p>Time which the exam starts.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="api.models.Mods">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">api.models.</span></span><span class="sig-name descname"><span class="pre">Mods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/api/models.html#Mods"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.models.Mods" title="Permalink to this definition"></a></dt>
+<dd><p>Django model which corresponds to the mods database table. Stores information for all the courses.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="api.models.Mods.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#api.models.Mods.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="api.models.Mods.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#api.models.Mods.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Mods.courseAU">
+<span class="sig-name descname"><span class="pre">courseAU</span></span><a class="headerlink" href="#api.models.Mods.courseAU" title="Permalink to this definition"></a></dt>
+<dd><p>Academic units granted by the course upon successfully clearing it.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Mods.courseCode">
+<span class="sig-name descname"><span class="pre">courseCode</span></span><a class="headerlink" href="#api.models.Mods.courseCode" title="Permalink to this definition"></a></dt>
+<dd><p>Course code which uniquely identifies the course from all courses offered in a semester.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Mods.courseIndex">
+<span class="sig-name descname"><span class="pre">courseIndex</span></span><a class="headerlink" href="#api.models.Mods.courseIndex" title="Permalink to this definition"></a></dt>
+<dd><p>Index of a course. A course can have multiple indexes.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Mods.courseName">
+<span class="sig-name descname"><span class="pre">courseName</span></span><a class="headerlink" href="#api.models.Mods.courseName" title="Permalink to this definition"></a></dt>
+<dd><p>Name of the course offered in a particular semester.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="api.models.Session">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">api.models.</span></span><span class="sig-name descname"><span class="pre">Session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/api/models.html#Session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.models.Session" title="Permalink to this definition"></a></dt>
+<dd><p>Django model which corresponds to the Session database table. Stores information for all sessions.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="api.models.Session.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#api.models.Session.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="api.models.Session.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#api.models.Session.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Session.courseGroup">
+<span class="sig-name descname"><span class="pre">courseGroup</span></span><a class="headerlink" href="#api.models.Session.courseGroup" title="Permalink to this definition"></a></dt>
+<dd><p>Course group groups a set of sessions to an index. However there are also exceptions where different groups might have similar sessions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Session.courseIndex">
+<span class="sig-name descname"><span class="pre">courseIndex</span></span><a class="headerlink" href="#api.models.Session.courseIndex" title="Permalink to this definition"></a></dt>
+<dd><p>Index of the course, which is made of a combination of different sessions for a course.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Session.courseRemarks">
+<span class="sig-name descname"><span class="pre">courseRemarks</span></span><a class="headerlink" href="#api.models.Session.courseRemarks" title="Permalink to this definition"></a></dt>
+<dd><p>Contains additional remarks for the course. Typical remarks would include the weeks that there are sessions held.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Session.courseType">
+<span class="sig-name descname"><span class="pre">courseType</span></span><a class="headerlink" href="#api.models.Session.courseType" title="Permalink to this definition"></a></dt>
+<dd><p>The type of session which can be seminar (SEM), lecture (LEC/STUDIO), tutorial (TUT), or laboratory (LAB) sessions.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Session.courseVenue">
+<span class="sig-name descname"><span class="pre">courseVenue</span></span><a class="headerlink" href="#api.models.Session.courseVenue" title="Permalink to this definition"></a></dt>
+<dd><p>Venue where a particular session is held. Venues can include lecture theatre, tutorial rooms, laboratory rooms or online.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Session.lessonDay">
+<span class="sig-name descname"><span class="pre">lessonDay</span></span><a class="headerlink" href="#api.models.Session.lessonDay" title="Permalink to this definition"></a></dt>
+<dd><p>The day of the week where the session is held.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Session.lessonTime">
+<span class="sig-name descname"><span class="pre">lessonTime</span></span><a class="headerlink" href="#api.models.Session.lessonTime" title="Permalink to this definition"></a></dt>
+<dd><p>Specifies the starting time and ending time for a particular session.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="api.models.Venue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">api.models.</span></span><span class="sig-name descname"><span class="pre">Venue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/api/models.html#Venue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#api.models.Venue" title="Permalink to this definition"></a></dt>
+<dd><p>Django model which corresponds to the Venue database table. Stores information of all the venues.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="api.models.Venue.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#api.models.Venue.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="api.models.Venue.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#api.models.Venue.MultipleObjectsReturned" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Venue.courseVenue">
+<span class="sig-name descname"><span class="pre">courseVenue</span></span><a class="headerlink" href="#api.models.Venue.courseVenue" title="Permalink to this definition"></a></dt>
+<dd><p>Venue where a particular session is held. The venue could be tutorial rooms, lecture theatre, laboratory rooms or online.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Venue.latitude">
+<span class="sig-name descname"><span class="pre">latitude</span></span><a class="headerlink" href="#api.models.Venue.latitude" title="Permalink to this definition"></a></dt>
+<dd><p>The latitude of a particular venue.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="api.models.Venue.longitude">
+<span class="sig-name descname"><span class="pre">longitude</span></span><a class="headerlink" href="#api.models.Venue.longitude" title="Permalink to this definition"></a></dt>
+<dd><p>The longitude of a particular venue.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="views.html" class="btn btn-neutral float-left" title="Views" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="serializers.html" class="btn btn-neutral float-right" title="Serializers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Team Lyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

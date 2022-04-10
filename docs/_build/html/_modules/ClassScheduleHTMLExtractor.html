@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClassScheduleHTMLExtractor &mdash; NTUPlanner 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> NTUPlanner
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Django-backend:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/serializers.html">Serializers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/parser.html">Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/classschedulehtmlextractor.html">Class Schedule Extractor</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NTUPlanner</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>ClassScheduleHTMLExtractor</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ClassScheduleHTMLExtractor</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.service</span> <span class="kn">import</span> <span class="n">Service</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support.select</span> <span class="kn">import</span> <span class="n">Select</span>
+<span class="kn">from</span> <span class="nn">webdriver_manager.chrome</span> <span class="kn">import</span> <span class="n">ChromeDriverManager</span>
+
+
+<div class="viewcode-block" id="Scraper"><a class="viewcode-back" href="../modules/classschedulehtmlextractor.html#ClassScheduleHTMLExtractor.Scraper">[docs]</a><span class="k">class</span> <span class="nc">Scraper</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A scraper class responsible for scraping exams and course schedule from NTU website. \n</span>
+
+<span class="sd">    :ivar examURL: URL where the exams information is posted. \n</span>
+<span class="sd">    :ivar scheduleURL: URL where the class schedule is posted.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">examURL</span> <span class="o">=</span> <span class="s2">&quot;https://wis.ntu.edu.sg/webexe/owa/exam_timetable_und.main&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduleURL</span> <span class="o">=</span> <span class="s2">&quot;https://wish.wis.ntu.edu.sg/webexe/owa/aus_schedule.main&quot;</span>
+
+<div class="viewcode-block" id="Scraper.scrapeExams"><a class="viewcode-back" href="../modules/classschedulehtmlextractor.html#ClassScheduleHTMLExtractor.Scraper.scrapeExams">[docs]</a>    <span class="k">def</span> <span class="nf">scrapeExams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Scrapes exams information from the school website and saves it as a html file. \n</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Setup driver management software and open a browser session</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">Service</span><span class="p">(</span><span class="n">executable_path</span><span class="o">=</span><span class="n">ChromeDriverManager</span><span class="p">()</span><span class="o">.</span><span class="n">install</span><span class="p">())</span>
+        <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="n">service</span><span class="p">)</span>
+
+        <span class="c1"># Navigate to the NTU Exam Schedule site</span>
+        <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examURL</span><span class="p">)</span>
+        <span class="n">html_source</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span>
+
+        <span class="n">general_access</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="s2">&quot;p_opt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="n">submit_button</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="s2">&quot;bOption&quot;</span><span class="p">)</span>
+        <span class="n">submit_button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+        <span class="n">ay</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="s2">&quot;p_plan_no&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="n">submit_button</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="s2">&quot;bOption&quot;</span><span class="p">)</span>
+        <span class="n">submit_button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+        <span class="n">submit_button</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="s2">&quot;bOption&quot;</span><span class="p">)</span>
+        <span class="n">submit_button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+        <span class="n">html_source</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;exam.html&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html_source</span><span class="p">)</span>
+
+        <span class="c1"># Close this new tab</span>
+        <span class="n">driver</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Scraper.scrapeSchedule"><a class="viewcode-back" href="../modules/classschedulehtmlextractor.html#ClassScheduleHTMLExtractor.Scraper.scrapeSchedule">[docs]</a>    <span class="k">def</span> <span class="nf">scrapeSchedule</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Scrapes course schedule information from the school website and saves it as a html file. \n</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Setup driver management software and open a browser session</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">Service</span><span class="p">(</span><span class="n">executable_path</span><span class="o">=</span><span class="n">ChromeDriverManager</span><span class="p">()</span><span class="o">.</span><span class="n">install</span><span class="p">())</span>
+        <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="n">service</span><span class="p">)</span>
+
+        <span class="c1"># Navigate to the NTU Class Schedule site</span>
+        <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheduleURL</span><span class="p">)</span>
+
+        <span class="c1"># Dropdown box as an element</span>
+        <span class="n">course_year_select_element</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="s2">&quot;r_course_yr&quot;</span><span class="p">)</span>
+        <span class="c1"># Dropdown box as a Select object</span>
+        <span class="n">course_year_select_object</span> <span class="o">=</span> <span class="n">Select</span><span class="p">(</span><span class="n">course_year_select_element</span><span class="p">)</span>
+
+        <span class="c1"># Collection of all elements in the dropdown box with an &quot;option&quot; tag</span>
+        <span class="n">all_course_year</span> <span class="o">=</span> <span class="n">course_year_select_element</span><span class="o">.</span><span class="n">find_elements</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">&quot;option&quot;</span><span class="p">)</span>
+
+        <span class="c1"># &quot;Load Class Schedule&quot; button</span>
+        <span class="n">load_class_schedule_button</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">&quot;input&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Store the ID of the original window</span>
+        <span class="n">original_window</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">current_window_handle</span>
+
+        <span class="c1"># For each element in the dropdown box</span>
+        <span class="k">for</span> <span class="n">course_year</span> <span class="ow">in</span> <span class="n">all_course_year</span><span class="p">:</span>
+            <span class="c1"># Saving its rendered text as a variable e.g. &quot;Computer Science Year 2&quot;</span>
+            <span class="n">course_year_text</span> <span class="o">=</span> <span class="n">course_year</span><span class="o">.</span><span class="n">text</span>
+
+            <span class="c1"># Saving its value attribute as a variable e.g. &quot;CSC;;2;F&quot;</span>
+            <span class="n">course_year_value</span> <span class="o">=</span> <span class="n">course_year</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+
+            <span class="c1"># If the element is not a valid choice, skip</span>
+            <span class="k">if</span> <span class="n">course_year_value</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Select the element</span>
+            <span class="n">course_year_select_object</span><span class="o">.</span><span class="n">select_by_value</span><span class="p">(</span><span class="n">course_year_value</span><span class="p">)</span>
+
+            <span class="c1"># Click on &quot;Load Class Schedule&quot; button</span>
+            <span class="n">load_class_schedule_button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+            <span class="c1"># For each open tab in the browser</span>
+            <span class="k">for</span> <span class="n">window_handle</span> <span class="ow">in</span> <span class="n">driver</span><span class="o">.</span><span class="n">window_handles</span><span class="p">:</span>
+                <span class="c1"># If the current tab is not the new tab, skip</span>
+                <span class="k">if</span> <span class="n">window_handle</span> <span class="o">==</span> <span class="n">original_window</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="c1"># Otherwise, switch to the new tab</span>
+                <span class="n">driver</span><span class="o">.</span><span class="n">switch_to</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="n">window_handle</span><span class="p">)</span>
+
+                <span class="c1"># Extract HTML source and save it as a file</span>
+                <span class="n">html_source</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">html_source</span><span class="p">)</span>
+                <span class="nb">open</span><span class="p">(</span><span class="n">course_year_text</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html_source</span><span class="p">)</span>
+
+                <span class="c1"># Close this new tab</span>
+                <span class="n">driver</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">break</span>
+
+            <span class="c1"># Switch back to the original site</span>
+            <span class="n">driver</span><span class="o">.</span><span class="n">switch_to</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="n">original_window</span><span class="p">)</span>
+
+        <span class="c1"># End browser session</span>
+        <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">scraper</span> <span class="o">=</span> <span class="n">Scraper</span><span class="p">()</span>
+    <span class="n">scraper</span><span class="o">.</span><span class="n">scrapeExams</span><span class="p">()</span>
+    <span class="n">scraper</span><span class="o">.</span><span class="n">scrapeSchedule</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Team Lyon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
