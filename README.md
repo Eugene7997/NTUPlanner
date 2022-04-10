@@ -1,6 +1,6 @@
 # CZ2006-Team Lyon
 
-Hi! We are team lyon and here is our application for our CZ2006 Project
+Hi! We are team lyon and here is our application for our CZ2006 Project.
 NTUPlanner is a web application that strives to provide an improved timetable planning 
 experience for NTU students. NTUPlanner aims to provide an effortless experience for students to 
 experiment and try out different combinations of lesson time slots suited for themselves. An 
