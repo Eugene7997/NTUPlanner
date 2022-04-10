@@ -7,6 +7,9 @@ experiment and try out different combinations of lesson time slots suited for th
 integrated map page also seeks to allow students to make better choices during timetable planning. 
 Together, NTUPlanner provides a simple way to plan timetables for a semester
 
+Here is our video demo!
+https://www.youtube.com/watch?v=G7xdLkZspcs
+
 # Setting up the React Frontend
 #### Installing nodeJS
 The first thing to do is to install nodeJS. <br>
